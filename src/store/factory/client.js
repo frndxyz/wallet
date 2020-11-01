@@ -1,30 +1,30 @@
-import Client from '@liquality/client'
+import Client from '@wagerr-wdk/client'
 
-import BitcoinSwapProvider from '@liquality/bitcoin-swap-provider'
-import BitcoinJsWalletProvider from '@liquality/bitcoin-js-wallet-provider'
-import BitcoinEsploraApiProvider from '@liquality/bitcoin-esplora-api-provider'
-import BitcoinEsploraSwapFindProvider from '@liquality/bitcoin-esplora-swap-find-provider'
-import BitcoinEarnFeeProvider from '@liquality/bitcoin-earn-fee-provider'
-import BitcoinRpcFeeProvider from '@liquality/bitcoin-rpc-fee-provider'
+import WagerrSwapProvider from '@wagerr-wdk/wagerr-swap-provider'
+import WagerrJsWalletProvider from '@wagerr-wdk/wagerr-js-wallet-provider'
+import WagerrEsploraApiProvider from '@wagerr-wdk/wagerr-esplora-api-provider'
+import WagerrEsploraSwapFindProvider from '@wagerr-wdk/wagerr-esplora-swap-find-provider'
+import WagerrEarnFeeProvider from '@wagerr-wdk/wagerr-earn-fee-provider'
+import WagerrRpcFeeProvider from '@wagerr-wdk/wagerr-rpc-fee-provider'
 
-import EthereumRpcProvider from '@liquality/ethereum-rpc-provider'
-import EthereumJsWalletProvider from '@liquality/ethereum-js-wallet-provider'
-import EthereumSwapProvider from '@liquality/ethereum-swap-provider'
-import EthereumScraperSwapFindProvider from '@liquality/ethereum-scraper-swap-find-provider'
-import EthereumGasStationFeeProvider from '@liquality/ethereum-gas-station-fee-provider'
-import EthereumRpcFeeProvider from '@liquality/ethereum-rpc-fee-provider'
+import EthereumRpcProvider from '@wagerr-wdk/ethereum-rpc-provider'
+import EthereumJsWalletProvider from '@wagerr-wdk/ethereum-js-wallet-provider'
+import EthereumSwapProvider from '@wagerr-wdk/ethereum-swap-provider'
+import EthereumScraperSwapFindProvider from '@wagerr-wdk/ethereum-scraper-swap-find-provider'
+import EthereumGasStationFeeProvider from '@wagerr-wdk/ethereum-gas-station-fee-provider'
+import EthereumRpcFeeProvider from '@wagerr-wdk/ethereum-rpc-fee-provider'
 
-import EthereumErc20Provider from '@liquality/ethereum-erc20-provider'
-import EthereumErc20SwapProvider from '@liquality/ethereum-erc20-swap-provider'
-import EthereumErc20ScraperSwapFindProvider from '@liquality/ethereum-erc20-scraper-swap-find-provider'
+import EthereumErc20Provider from '@wagerr-wdk/ethereum-erc20-provider'
+import EthereumErc20SwapProvider from '@wagerr-wdk/ethereum-erc20-swap-provider'
+import EthereumErc20ScraperSwapFindProvider from '@wagerr-wdk/ethereum-erc20-scraper-swap-find-provider'
 
-import BitcoinNetworks from '@liquality/bitcoin-networks'
-import EthereumNetworks from '@liquality/ethereum-networks'
+import WagerrNetworks from '@wagerr-wdk/wagerr-networks'
+import EthereumNetworks from '@wagerr-wdk/ethereum-networks'
 
 const rpc = {
-  BTC: {
-    bitcoin: ['https://liquality.io/electrs', BitcoinNetworks.bitcoin, 2],
-    bitcoin_testnet: ['https://liquality.io/testnet/electrs', BitcoinNetworks.bitcoin_testnet, 2]
+  WGR: {
+    wagerr: ['https://explorer.wagerr.com/api', WagerrNetworks.wagerr, 2],
+    wagerr_testnet: ['https://explorer2.wagerr.com/api', WagerrNetworks.wagerr_testnet, 2]
   },
   ETH: {
     mainnet: ['https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f'],
@@ -46,7 +46,7 @@ const rpc = {
 }
 
 const networks = {
-  BTC: BitcoinNetworks,
+  WGR: WagerrNetworks,
   ETH: EthereumNetworks,
   DAI: EthereumNetworks,
   USDC: EthereumNetworks,
@@ -55,7 +55,7 @@ const networks = {
 }
 
 const RpcProviders = {
-  BTC: BitcoinEsploraApiProvider,
+  WGR: WagerrEsploraApiProvider,
   ETH: EthereumRpcProvider,
   DAI: EthereumRpcProvider,
   USDC: EthereumRpcProvider,
@@ -64,7 +64,7 @@ const RpcProviders = {
 }
 
 const JsWalletProviders = {
-  BTC: BitcoinJsWalletProvider,
+  WGR: WagerrJsWalletProvider,
   ETH: EthereumJsWalletProvider,
   DAI: EthereumJsWalletProvider,
   USDC: EthereumJsWalletProvider,
@@ -73,7 +73,7 @@ const JsWalletProviders = {
 }
 
 const SwapProviders = {
-  BTC: BitcoinSwapProvider,
+  WGR: WagerrSwapProvider,
   ETH: EthereumSwapProvider,
   DAI: EthereumErc20SwapProvider,
   USDC: EthereumErc20SwapProvider,
@@ -82,7 +82,7 @@ const SwapProviders = {
 }
 
 const AdditionalSwapProviders = {
-  BTC: BitcoinEsploraSwapFindProvider,
+  WGR: WagerrEsploraSwapFindProvider,
   ETH: EthereumScraperSwapFindProvider,
   DAI: EthereumErc20ScraperSwapFindProvider,
   USDC: EthereumErc20ScraperSwapFindProvider,
@@ -91,9 +91,9 @@ const AdditionalSwapProviders = {
 }
 
 const FeeProviders = {
-  BTC: {
-    bitcoin: BitcoinEarnFeeProvider,
-    bitcoin_testnet: BitcoinRpcFeeProvider
+  WGR: {
+    wagerr: WagerrEarnFeeProvider,
+    wagerr_testnet: WagerrRpcFeeProvider
   },
   ETH: {
     mainnet: EthereumGasStationFeeProvider,
@@ -134,15 +134,15 @@ const ERC20 = {
 }
 
 export const NetworkAssets = {
-  mainnet: ['BTC', 'ETH', 'DAI', 'USDC', 'USDT', 'WBTC'],
-  testnet: ['BTC', 'ETH', 'DAI']
+  mainnet: ['WGR', 'ETH', 'DAI', 'USDC', 'USDT', 'WBTC'],
+  testnet: ['WGR', 'ETH', 'DAI']
 }
 
 export const createClient = (network, mnemonic) => {
   const isTestnet = network === 'testnet'
 
   const NetworkArgs = {
-    BTC: isTestnet ? 'bitcoin_testnet' : 'bitcoin',
+    WGR: isTestnet ? 'wagerr_testnet' : 'wagerr',
     ETH: isTestnet ? 'rinkeby' : 'mainnet',
     DAI: isTestnet ? 'rinkeby' : 'mainnet',
     USDC: isTestnet ? 'rinkeby' : 'mainnet',
@@ -151,7 +151,7 @@ export const createClient = (network, mnemonic) => {
   }
 
   const SwapArgs = {
-    BTC: [networks.BTC[NetworkArgs.BTC], 'p2wsh'],
+    WGR: [networks.WGR[NetworkArgs.WGR], 'p2wsh'],
     ETH: [],
     DAI: [],
     USDC: [],
@@ -160,7 +160,7 @@ export const createClient = (network, mnemonic) => {
   }
 
   const AdditionalSwapArgs = {
-    BTC: rpc.BTC[NetworkArgs.BTC],
+    WGR: rpc.WGR[NetworkArgs.WGR],
     ETH: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
     DAI: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
     USDC: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],

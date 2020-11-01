@@ -64,7 +64,7 @@ export default {
     position: absolute;
     top: 10px;
     left: 20px;
-    height: 12px;
+    height: 20px;
   }
 
   &_network {

@@ -29,7 +29,7 @@ import { getChainFromAsset } from '@/utils/asset'
 import Warning from '@/components/Warning'
 import CopyIcon from '@/assets/icons/copy.svg'
 import TickIcon from '@/assets/icons/tick.svg'
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 
 export default {
   components: {
@@ -50,12 +50,12 @@ export default {
     ...mapState(['addresses', 'activeNetwork', 'activeWalletId']),
     address () {
       const address = this.addresses[this.activeNetwork]?.[this.activeWalletId]?.[this.asset]
-      return cryptoassets[this.asset.toLowerCase()].formatAddress(address)
+      return cryptoassets[this.asset].formatAddress(address)
     },
     chainName () {
       const chain = getChainFromAsset(this.asset)
       return ({
-        BTC: 'bitcoin',
+        WGR: 'wagerr',
         ETH: 'ethereum'
       })[chain]
     }

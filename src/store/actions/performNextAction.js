@@ -1,5 +1,5 @@
 import { random } from 'lodash-es'
-import { sha256 } from '@liquality/crypto'
+import { sha256 } from '@wagerr-wdk/crypto'
 import { updateOrder, unlockAsset } from '../utils'
 import { createSwapNotification } from '../../broker/notification'
 

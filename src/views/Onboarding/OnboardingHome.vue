@@ -80,7 +80,7 @@
           >1.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Responsibilities. &nbsp;</span>
           <span
             class="c2"
-          >In order to use certain features of the Site and Services, you must connect to your digital asset wallet. &nbsp;You acknowledge that Company is not responsible for transferring, safeguarding, or maintaining your private keys or any digital currency associated therewith. &nbsp;If you lose, mishandle, or have stolen associated digital currency private keys, you acknowledge that you may not be able to recover associated digital currency, and that Company is not responsible for such loss. &nbsp; You agree to only enter into a swap transaction using bitcoin (BTC) or ether (ETH) in your custody that exists on a “testnet” blockchain. &nbsp;You agree not to initiate or complete a swap transaction using, or otherwise provide any digital currency that exists on, a “mainnet” blockchain or any digital currency that may be considered a security under applicable law. You acknowledge that Company is not responsible for any loss or damage arising from your failure to comply with the requirements hereunder.</span>
+          >In order to use certain features of the Site and Services, you must connect to your digital asset wallet. &nbsp;You acknowledge that Company is not responsible for transferring, safeguarding, or maintaining your private keys or any digital currency associated therewith. &nbsp;If you lose, mishandle, or have stolen associated digital currency private keys, you acknowledge that you may not be able to recover associated digital currency, and that Company is not responsible for such loss. &nbsp; You agree to only enter into a swap transaction using wagerr (WGR) or ether (ETH) in your custody that exists on a “testnet” blockchain. &nbsp;You agree not to initiate or complete a swap transaction using, or otherwise provide any digital currency that exists on, a “mainnet” blockchain or any digital currency that may be considered a security under applicable law. You acknowledge that Company is not responsible for any loss or damage arising from your failure to comply with the requirements hereunder.</span>
         </p>
         <p class="c0" id="h.1fob9te-1">
           <span class="c3">1.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -88,7 +88,7 @@
           <span class="c3">.</span>
           <span
             class="c2"
-          >&nbsp; You acknowledge that you may receive a lesser amount of BTC or ETH in your wallet following the swap transaction than displayed on the swap page as a result of a portion of such BTC or ETH being used to pay fees to miners.</span>
+          >&nbsp; You acknowledge that you may receive a lesser amount of WGR or ETH in your wallet following the swap transaction than displayed on the swap page as a result of a portion of such WGR or ETH being used to pay fees to miners.</span>
         </p>
         <p class="c0" id="h.1fob9te-1">
           <span class="c3">1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>

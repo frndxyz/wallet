@@ -1,11 +1,11 @@
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 
 const EXPLORERS = {
   ETH: {
     testnet: 'https://rinkeby.etherscan.io/tx/0x',
     mainnet: 'https://etherscan.io/tx/0x'
   },
-  BTC: {
+  WGR: {
     testnet: 'https://blockstream.info/testnet/tx/',
     mainnet: 'https://blockstream.info/tx/'
   }
@@ -18,7 +18,7 @@ export const getChainFromAsset = asset => {
 }
 
 export const getAssetColorStyle = asset => {
-  const assetData = cryptoassets[asset.toLowerCase()]
+  const assetData = cryptoassets[asset]
   if (assetData.color) return { color: assetData.color }
 }
 

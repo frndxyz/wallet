@@ -26,7 +26,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 import { shortenAddress } from '@/utils/address'
 import { getAssetColorStyle } from '@/utils/asset'
 import Warning from '@/components/Warning'
@@ -54,7 +54,7 @@ export default {
     getAssetColorStyle,
     async send () {
       this.loading = true
-      const amount = cryptoassets[this.asset.toLowerCase()].currencyToUnit(this.sendAmount).toNumber()
+      const amount = cryptoassets[this.asset].currencyToUnit(this.sendAmount).toNumber()
 
       await this.sendTransaction({
         network: this.activeNetwork,

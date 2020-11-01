@@ -50,7 +50,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
 import RefreshIcon from '@/assets/icons/refresh.svg'
 import SendIcon from '@/assets/icons/arrow_send.svg'
@@ -83,7 +83,7 @@ export default {
     },
     address () {
       const address = this.addresses[this.activeNetwork]?.[this.activeWalletId]?.[this.asset]
-      return address && cryptoassets[this.asset.toLowerCase()].formatAddress(address)
+      return address && cryptoassets[this.asset].formatAddress(address)
     },
     assetHistory () {
       if (!this.history[this.activeNetwork]) return []

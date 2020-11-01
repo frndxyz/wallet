@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 
 export default {
   props: ['asset', 'value', 'fees'],
   methods: {
     getTooltip (name) {
-      const unit = cryptoassets[this.asset.toLowerCase()].fees.unit
+      const unit = cryptoassets[this.asset].fees.unit
       let content = `${this.fees[name].fee} ${unit}`
       if (this.fees[name].wait) {
         content += `<br />${this.fees[name].wait}s`

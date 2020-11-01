@@ -1,5 +1,5 @@
 import BN from 'bignumber.js'
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 
 import { getMarketData } from '../utils'
 import { dp } from '../../utils/coinFormatter'
@@ -25,7 +25,7 @@ export const updateMarketData = async ({ commit, getters }, { network }) => {
     .filter(({ to, from }) => networkAssets.includes(to) && networkAssets.includes(from))
     .map(({ to, from }) => {
       return allMarketData.reduce((acc, marketData) => {
-        const convert = cryptoassets[from.toLowerCase()]
+        const convert = cryptoassets[from]
         const market = marketData.find(market => market.to === to && market.from === from)
         if (!market) return acc
 

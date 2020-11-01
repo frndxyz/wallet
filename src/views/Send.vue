@@ -43,7 +43,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import BN from 'bignumber.js'
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 import FeeSelector from '@/components/FeeSelector'
 import { prettyBalance } from '@/utils/coinFormatter'
 import { getChainFromAsset, getAssetColorStyle } from '@/utils/asset'
@@ -74,7 +74,7 @@ export default {
       return this.assetFees && Object.keys(this.assetFees).length
     },
     isValidAddress () {
-      return cryptoassets[this.asset.toLowerCase()].isValidAddress(this.sendAddress)
+      return cryptoassets[this.asset].isValidAddress(this.sendAddress)
     },
     canSend () {
       if (!this.sendAddress) return false

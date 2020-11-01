@@ -1,8 +1,8 @@
 import BN from 'bignumber.js'
-import cryptoassets from '@liquality/cryptoassets'
+import cryptoassets from '@wagerr-wdk/cryptoassets'
 
 const DP_UI_MAP = {
-  BTC: 6,
+  WGR: 6,
   ETH: 6,
   DAI: 6,
   USDC: 6,
@@ -13,7 +13,7 @@ const DP_UI_MAP = {
 export const dp = (amount, coin) => {
   if (!amount) return amount
 
-  return BN(amount).dp(cryptoassets[coin.toLowerCase()].decimals)
+  return BN(amount).dp(cryptoassets[coin].decimals)
 }
 
 export const dpUI = (amount, coin, floor = false) => {
@@ -25,7 +25,7 @@ export const dpUI = (amount, coin, floor = false) => {
 export const prettyBalance = (amount, coin, floor = false) => {
   if (!amount) return amount
 
-  amount = cryptoassets[coin.toLowerCase()].unitToCurrency(amount)
+  amount = cryptoassets[coin].unitToCurrency(amount)
 
   return dpUI(amount, coin, floor)
 }
