@@ -155,10 +155,11 @@ export default {
       const amount = BN(this.safeAmount)
 
       if (amount.gt(this.balance)) return 'Amount exceeds available balance.'
-       if (amount.gt(this.max)) return 'Please reduce amount. It exceeds maximum.'
-       if (amount.lt(this.min)) return 'Please increase amount. It is below minimum.'
+      if (this.asset === 'ETH' && amount.eq(this.balance)) return 'Can\'t swap full balance. Subtract enough for fee.'
+      if (amount.gt(this.max)) return 'Please reduce amount. It exceeds maximum.'
+      if (amount.lt(this.min)) return 'Please increase amount. It is below minimum.'
 
-       return null
+      return null
      },
      canSwap () {
        if (this.ethRequired || this.amountError) return false

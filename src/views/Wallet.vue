@@ -10,7 +10,7 @@
           <span class="wallet_stats_total">{{ totalFiatBalance }}</span
           ><span>USD</span>
         </div>
-        <span>{{assetsWithBalance.length}} Asset{{ assetsWithBalance.length > 1 ? 's' : '' }}</span>
+        <span>{{assetsWithBalance.length}} Asset{{ assetsWithBalance.length === 1 ? '' : 's' }}</span>
       </div>
       <span v-else>Loading ...</span>
     </div>
