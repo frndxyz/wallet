@@ -4,6 +4,9 @@
       <strong>{{ wallet.name }}</strong>
       <span class="text-muted">({{ activeNetwork }})</span>
     </NavBar>
+    <InfoNotification v-if="ethRequired">
+       <EthRequiredMessage />
+    </InfoNotification>
     <div class="wallet_stats">
       <div v-if="networkAssetsLoaded">
         <div>
@@ -42,11 +45,15 @@ import { NetworkAssets } from "@/store/factory/client";
 import cryptoassets from "@wagerr-wdk/cryptoassets";
 import { prettyBalance, prettyFiatBalance } from "@/utils/coinFormatter";
 import NavBar from "@/components/NavBar.vue";
+import InfoNotification from '@/components/InfoNotification'
+import EthRequiredMessage from '@/components/EthRequiredMessage'
 import ChevronRightIcon from "@/assets/icons/chevron_right.svg";
 
 export default {
   components: {
     NavBar,
+    InfoNotification,
+    EthRequiredMessage,
     ChevronRightIcon,
   },
   computed: {
@@ -66,6 +73,9 @@ export default {
 
       return this.balances[this.activeNetwork][this.activeWalletId];
     },
+    ethRequired () {
+       return this.networkWalletBalances.ETH === 0
+     },
     orderedBalances () {
        const assets = NetworkAssets[this.activeNetwork]
        return Object.entries(this.networkWalletBalances).sort((a, b) => {
