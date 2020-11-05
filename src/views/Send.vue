@@ -75,13 +75,7 @@
         >
           Cancel
         </button>
-        <button
-          class="btn btn-primary btn-lg"
-          @click="send"
-          :disabled="!canSend"
-        >
-          Continue
-        </button>
+        <button class="btn btn-primary btn-lg" @click="send" :disabled="!canSend">Review Terms</button>
       </div>
     </div>
   </div>
@@ -132,15 +126,14 @@ export default {
       return cryptoassets[this.asset].isValidAddress(this.sendAddress);
     },
     addressError() {
-      if (!this.isValidAddress) return "Address invalid.";
+      if (!this.isValidAddress) return 'Wrong format. Please check the address.'
       return null;
     },
     amountError() {
       const sendAmount = BN(this.sendAmount);
       if (sendAmount.gt(this.balance))
         return "Amount exceeds available balance.";
-      if (this.asset === "ETH" && sendAmount.eq(this.balance))
-        return "Can't send full balance. Subtract enough for fee.";
+      if (this.asset === 'ETH' && sendAmount.eq(this.balance)) return 'To account for the fee, lower this amount.'
       return null;
     },
     canSend() {
