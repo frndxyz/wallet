@@ -3,7 +3,7 @@
     <div class="wrapper_top form">
       <div class="form-group">
         <label>Send</label>
-        <p class="confirm-value" :style="getAssetColorStyle(asset)">{{sendAmount}} {{asset}}</p>
+        <p class="text-muted">${{prettyFiatBalance(sendAmount, fiatRates[asset])}}</p>
       </div>
       <div class="form-group">
         <label>To</label>
@@ -27,6 +27,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import cryptoassets from '@wagerr-wdk/cryptoassets'
+import { prettyFiatBalance } from '@/utils/coinFormatter'
 import { shortenAddress } from '@/utils/address'
 import { getAssetColorStyle } from '@/utils/asset'
 import Warning from '@/components/Warning'
@@ -46,11 +47,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['activeNetwork', 'activeWalletId'])
+    ...mapState(['activeNetwork', 'activeWalletId', 'fiatRates'])
   },
   methods: {
     ...mapActions(['sendTransaction']),
     shortenAddress,
+    prettyFiatBalance,
     getAssetColorStyle,
     async send () {
       this.loading = true
