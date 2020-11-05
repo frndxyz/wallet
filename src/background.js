@@ -1,3 +1,5 @@
+import 'setimmediate'
+import { random } from 'lodash-es'
 import store from './store'
 
 let balanceInterval
