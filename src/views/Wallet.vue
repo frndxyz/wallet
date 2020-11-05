@@ -15,11 +15,7 @@
       <span v-else>Loading ...</span>
     </div>
     <div class="wallet_accounts" v-if="networkWalletBalances">
-      <router-link
-        v-for="(balance, asset) in networkWalletBalances"
-        :key="asset"
-        v-bind:to="'/account/' + asset"
-      >
+      <router-link v-for="([asset, balance]) in orderedBalances" :key="asset" v-bind:to="'/account/' + asset" >
         <div class="account-item d-flex align-items-center">
           <img
             :src="'./img/' + asset.toLowerCase() + '.png'"
@@ -70,15 +66,14 @@ export default {
 
       return this.balances[this.activeNetwork][this.activeWalletId];
     },
-    networkAssets() {
-      return NetworkAssets[this.activeNetwork];
+    orderedBalances () {
+       const assets = NetworkAssets[this.activeNetwork]
+       return Object.entries(this.networkWalletBalances).sort((a, b) => {
+         return assets.indexOf(a[0]) - assets.indexOf(b[0])
+       })
     },
     networkAssetsLoaded() {
-      return (
-        this.networkWalletBalances &&
-        this.networkAssets.length ===
-          Object.keys(this.networkWalletBalances).length
-      );
+      return this.networkWalletBalances && NetworkAssets[this.activeNetwork].length === Object.keys(this.networkWalletBalances).length
     },
     totalFiatBalance() {
       const total = Object.entries(this.networkWalletBalances).reduce(
