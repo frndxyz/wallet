@@ -12,7 +12,7 @@
           <div class="input-group-append">
             <span class="input-group-text">{{asset}}</span>
           </div>
-          <input type="text" class="form-control" :class="{ 'is-invalid': amountError }" id="amount" v-model="amount" placeholder="0.00" :style="getAssetColorStyle(asset)">
+          <input type="text" class="form-control" :class="{ 'is-invalid': amountError }" id="amount" v-model="amount" placeholder="0.00" :style="getAssetColorStyle(asset)" autocomplete="off">
         </div>
         <small v-if="amountError" class="text-danger form-text text-right">{{ amountError }}</small>
         <small class="form-text d-flex justify-content-between">
