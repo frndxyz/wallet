@@ -39,7 +39,6 @@
 
     <div class="wrapper_bottom">
       <div class="swap-info">
-        <Warning />
         <div class="media">
           <ClockIcon class="swap-info_clock" />
           <p class="text-muted media-body">
@@ -47,6 +46,7 @@
             hours at {{ expiration }}
           </p>
         </div>
+        <Warning />
       </div>
       <div class="button-group">
         <button
