@@ -127,6 +127,7 @@
             />
           </div>
         </div>
+        
         <div class="button-group">
           <router-link :to="`/account/${asset}`"><button class="btn btn-light btn-outline-primary btn-lg">Cancel</button></router-link>
           <button
@@ -140,7 +141,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>

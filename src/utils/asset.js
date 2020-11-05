@@ -10,9 +10,12 @@ const EXPLORERS = {
     mainnet: 'https://blockstream.info/tx/'
   }
 }
+export const isERC20 = asset => {
+  return ['DAI', 'USDC', 'USDT', 'WBTC'].includes(asset)
+}
 
 export const getChainFromAsset = asset => {
-  if (['DAI', 'USDC', 'USDT', 'WBTC'].includes(asset)) return 'ETH'
+  if (isERC20(asset)) return 'ETH'
 
   return asset
 }
