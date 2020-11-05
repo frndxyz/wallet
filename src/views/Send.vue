@@ -1,6 +1,6 @@
 <template>
   <div class="send wrapper form">
-    <div class="wrapper_top form">
+    <div class="wrapper_top">
       <div class="form-group send_asset">
         <label for="amount">
           Amount
@@ -16,20 +16,51 @@
           <div class="input-group-append">
             <span class="input-group-text">{{ asset }}</span>
           </div>
-          <input type="text" :class="{ 'is-invalid': sendAmount && amountError }" :style="getAssetColorStyle(asset)" v-model="sendAmount" class="form-control" id="amount" placeholder="0.00" autocomplete="off" required>
+          <input
+            type="text"
+            :class="{ 'is-invalid': sendAmount && amountError }"
+            :style="getAssetColorStyle(asset)"
+            v-model="sendAmount"
+            class="form-control"
+            id="amount"
+            placeholder="0.00"
+            autocomplete="off"
+            required
+          />
         </div>
-        <small v-if="sendAmount && amountError" class="text-danger form-text text-right">{{ amountError }}</small>
+        <small
+          v-if="sendAmount && amountError"
+          class="text-danger form-text text-right"
+          >{{ amountError }}</small
+        >
       </div>
       <div class="form-group">
         <label for="address">Send to</label>
         <div class="input-group">
-          <input type="text" :class="{ 'is-invalid': sendAddress && addressError }" v-model="sendAddress" class="form-control form-control-sm" id="address" placeholder="Address" autocomplete="off" required>
+          <input
+            type="text"
+            :class="{ 'is-invalid': sendAddress && addressError }"
+            v-model="sendAddress"
+            class="form-control form-control-sm"
+            id="address"
+            placeholder="Address"
+            autocomplete="off"
+            required
+          />
         </div>
-        <small v-if="sendAddress && addressError" class="text-danger form-text text-right">{{ addressError }}</small>
+        <small
+          v-if="sendAddress && addressError"
+          class="text-danger form-text text-right"
+          >{{ addressError }}</small
+        >
       </div>
+    </div>
+
+    <div class="wrapper_bottom">
       <div class="form-group" v-if="feesAvailable">
         <label>Network Speed/Fee</label>
-        <div>
+        <div class="send_fees">
+          {{ assetChain }}
           <FeeSelector
             :asset="asset"
             v-model="selectedFee"
@@ -37,9 +68,6 @@
           />
         </div>
       </div>
-    </div>
-
-    <div class="wrapper_bottom">
       <div class="button-group">
         <button
           class="btn btn-light btn-outline-primary btn-lg"
@@ -103,22 +131,23 @@ export default {
     isValidAddress() {
       return cryptoassets[this.asset].isValidAddress(this.sendAddress);
     },
-    addressError () {
-       if (!this.isValidAddress) return 'Address invalid.'
-       return null
-     },
-     amountError () {
-       const sendAmount = BN(this.sendAmount)
-       if (sendAmount.gt(this.balance)) return 'Amount exceeds available balance.'
-       if (this.asset === 'ETH' && sendAmount.eq(this.balance)) return 'Can\'t send full balance. Subtract enough for fee.'
-       return null
-     },
+    addressError() {
+      if (!this.isValidAddress) return "Address invalid.";
+      return null;
+    },
+    amountError() {
+      const sendAmount = BN(this.sendAmount);
+      if (sendAmount.gt(this.balance))
+        return "Amount exceeds available balance.";
+      if (this.asset === "ETH" && sendAmount.eq(this.balance))
+        return "Can't send full balance. Subtract enough for fee.";
+      return null;
+    },
     canSend() {
-      
       const sendAmount = BN(this.sendAmount);
 
-      if (!this.sendAddress || this.addressError) return false
-      if (sendAmount.lte(0) || this.amountError) return false
+      if (!this.sendAddress || this.addressError) return false;
+      if (sendAmount.lte(0) || this.amountError) return false;
 
       return true;
     },
@@ -163,5 +192,14 @@ export default {
       margin-left: 12px;
     }
   }
+  &_fees {
+     display: flex;
+     align-items: center;
+     font-weight: bold;
+     margin: 6px 0;
+     .fee-selector {
+       margin-left: 6px;
+     }
+   }
 }
 </style>
