@@ -1,129 +1,176 @@
 <template>
   <div class="send wrapper form">
     <div class="wrapper_top form">
+      <div class="form-group send_asset">
+        <label for="amount">
+          Amount
+          <span class="label-sub"
+            ><span class="text-muted">Available</span> {{ balance }}
+            {{ asset }}</span
+          >
+          <span class="label-append"
+            >${{ prettyFiatBalance(sendAmount, fiatRates[asset]) }}</span
+          >
+        </label>
+        <div class="input-group">
+          <div class="input-group-append">
+            <span class="input-group-text">{{ asset }}</span>
+          </div>
+          <input
+            type="text"
+            :style="getAssetColorStyle(asset)"
+            v-model="sendAmount"
+            class="form-control"
+            id="amount"
+            placeholder="0.00"
+            required
+          />
+        </div>
+      </div>
       <div class="form-group">
         <label for="address">Send to</label>
         <div class="input-group">
-          <input type="text" v-model="sendAddress" class="form-control form-control-sm" id="address" placeholder="Address" autocomplete="off" required>
+          <input
+            type="text"
+            v-model="sendAddress"
+            class="form-control form-control-sm"
+            id="address"
+            placeholder="Address"
+            autocomplete="off"
+            required
+          />
         </div>
-        <small v-if="sendAddress && !isValidAddress" class="text-danger">Invalid address</small>
-      </div>
-      <div class="form-group send_asset">
-         <label for="amount">
-           Amount
-           <span class="label-append">${{prettyFiatBalance(sendAmount, fiatRates[asset])}}</span>
-         </label>
-        <div class="input-group">
-          <div class="input-group-append">
-            <span class="input-group-text">{{asset}}</span>
-          </div>
-          <input type="text" :style="getAssetColorStyle(asset)" v-model="sendAmount" class="form-control" id="amount" placeholder="0.00" required>
-        </div>
-        <small class="form-text d-flex">
-          <div class="text-right w-100">
-            <span class="text-muted">Balance&nbsp;</span>
-            <span>{{balance}} {{asset}}</span>
-          </div>
-        </small>
+        <small v-if="sendAddress && !isValidAddress" class="text-danger"
+          >Invalid address</small
+        >
       </div>
       <div class="form-group" v-if="feesAvailable">
         <label>Network Speed/Fee</label>
         <div>
-          <FeeSelector :asset="asset" v-model="selectedFee" v-bind:fees="assetFees" />
+          <FeeSelector
+            :asset="asset"
+            v-model="selectedFee"
+            v-bind:fees="assetFees"
+          />
         </div>
       </div>
     </div>
 
     <div class="wrapper_bottom">
       <div class="button-group">
-        <button class="btn btn-light btn-outline-primary btn-lg" @click="$router.go(-1)">Cancel</button>
-        <button class="btn btn-primary btn-lg" @click="send" :disabled="!canSend">Continue</button>
+        <button
+          class="btn btn-light btn-outline-primary btn-lg"
+          @click="$router.go(-1)"
+        >
+          Cancel
+        </button>
+        <button
+          class="btn btn-primary btn-lg"
+          @click="send"
+          :disabled="!canSend"
+        >
+          Continue
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import BN from 'bignumber.js'
-import cryptoassets from '@wagerr-wdk/cryptoassets'
-import FeeSelector from '@/components/FeeSelector'
-import { prettyBalance, prettyFiatBalance } from '@/utils/coinFormatter'
-import { getChainFromAsset, getAssetColorStyle } from '@/utils/asset'
+import { mapState, mapActions } from "vuex";
+import BN from "bignumber.js";
+import cryptoassets from "@wagerr-wdk/cryptoassets";
+import FeeSelector from "@/components/FeeSelector";
+import { prettyBalance, prettyFiatBalance } from "@/utils/coinFormatter";
+import { getChainFromAsset, getAssetColorStyle } from "@/utils/asset";
 
 export default {
   components: {
-    FeeSelector
+    FeeSelector,
   },
-  data () {
+  data() {
     return {
       sendAmount: 0,
       sendAddress: null,
-      selectedFee: 'average'
-    }
+      selectedFee: "average",
+    };
   },
   props: {
-    asset: String
+    asset: String,
   },
   computed: {
-    ...mapState(['activeNetwork', 'activeWalletId', 'balances', 'fees', 'fiatRates']),
-    assetChain () {
-      return getChainFromAsset(this.asset)
+    ...mapState([
+      "activeNetwork",
+      "activeWalletId",
+      "balances",
+      "fees",
+      "fiatRates",
+    ]),
+    assetChain() {
+      return getChainFromAsset(this.asset);
     },
-    assetFees () {
-      return this.fees[this.activeNetwork]?.[this.activeWalletId]?.[this.assetChain]
+    assetFees() {
+      return this.fees[this.activeNetwork]?.[this.activeWalletId]?.[
+        this.assetChain
+      ];
     },
-    feesAvailable () {
-      return this.assetFees && Object.keys(this.assetFees).length
+    feesAvailable() {
+      return this.assetFees && Object.keys(this.assetFees).length;
     },
-    isValidAddress () {
-      return cryptoassets[this.asset].isValidAddress(this.sendAddress)
+    isValidAddress() {
+      return cryptoassets[this.asset].isValidAddress(this.sendAddress);
     },
-    canSend () {
-      if (!this.sendAddress) return false
+    canSend() {
+      if (!this.sendAddress) return false;
 
-      const sendAmount = BN(this.sendAmount)
+      const sendAmount = BN(this.sendAmount);
 
-      if (sendAmount.gt(this.balance) || sendAmount.lte(0)) return false
+      if (sendAmount.gt(this.balance) || sendAmount.lte(0)) return false;
 
-      if (!this.isValidAddress) return false
+      if (!this.isValidAddress) return false;
 
-      return true
+      return true;
     },
-    balance () {
-      const rawBalance = this.balances[this.activeNetwork][this.activeWalletId][this.asset]
-      return prettyBalance(rawBalance, this.asset)
-    }
+    balance() {
+      const rawBalance = this.balances[this.activeNetwork][this.activeWalletId][
+        this.asset
+      ];
+      return prettyBalance(rawBalance, this.asset);
+    },
   },
   methods: {
     prettyBalance,
     prettyFiatBalance,
     getAssetColorStyle,
-    ...mapActions(['updateFees']),
-    async send () {
-      const fee = this.feesAvailable ? this.assetFees[this.selectedFee].fee : undefined
+    ...mapActions(["updateFees"]),
+    async send() {
+      const fee = this.feesAvailable
+        ? this.assetFees[this.selectedFee].fee
+        : undefined;
       this.$router.push({
-        name: 'SendConfirm',
+        name: "SendConfirm",
         params: {
-          asset: this.asset, sendAddress: this.sendAddress, sendAmount: this.sendAmount, fee
-        }
-      })
-    }
+          asset: this.asset,
+          sendAddress: this.sendAddress,
+          sendAmount: this.sendAmount,
+          fee,
+        },
+      });
+    },
   },
-  created () {
-    this.updateFees({ asset: this.asset })
-  }
-}
+  created() {
+    this.updateFees({ asset: this.asset });
+  },
+};
 </script>
 
 <style lang="scss">
 .send {
   &_asset {
-     input {
-       text-align: right;
-       margin-left: 12px;
-     }
-   }
-
+    input {
+      text-align: right;
+      margin-left: 12px;
+    }
+  }
 }
 </style>

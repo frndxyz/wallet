@@ -68,7 +68,7 @@ svg {
 
   .btn {
     width: 152px;
-    
+
     &.btn-primary {
       margin-left: auto;
     }
@@ -82,11 +82,16 @@ svg {
     text-transform: uppercase;
     width: 100%;
 
-     .label-append {
+     & > .label-append {
        float: right;
        color: $text-muted;
        font-weight: normal;
      }
+
+     & > .label-sub {
+      text-transform: none;
+      font-weight: normal;
+    }
   }
   label.btn {
     text-transform: none;
