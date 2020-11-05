@@ -133,4 +133,35 @@ window.providerManager = new ProviderManager()
  }
  `
 
- export { providerManager, ethereumProvider }
+ const wagerrProvider = `
+ const REQUEST_MAP = {
+   wallet_getConnectedNetwork: 'chain.getConnectedNetwork',
+   wallet_getAddresses: 'wallet.getAddresses',
+   wallet_signMessage: 'wallet.signMessage',
+   wallet_sendTransaction: 'chain.sendTransaction',
+   wallet_signP2SHTransaction: 'signP2SHTransaction',
+ }
+
+ async function handleRequest (req) {
+   const wgr = window.providerManager.getProviderFor('WGR')
+   const method = REQUEST_MAP[req.method] || req.method
+   return wgr.getMethod(method)(...req.params)
+ }
+
+ window.wagerr = {
+   enable: async () => {
+     const accepted = await window.providerManager.enable()
+     if (!accepted) throw new Error('User rejected')
+     const wgr = window.providerManager.getProviderFor('WGR')
+     return wgr.getMethod('wallet.getAddresses')()
+   },
+   request: async (req) => {
+     const params = req.params || []
+     return handleRequest({
+       method: req.method, params
+     })
+   }
+ };
+ `
+
+ export { providerManager, ethereumProvider, wagerrProvider }
