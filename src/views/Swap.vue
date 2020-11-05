@@ -45,12 +45,7 @@
         >
         <small class="form-text d-flex justify-content-between">
           <div class="swap_limits">
-            <a href="javascript:void(0)" @click="setAmount(min)">Min</a>
-            {{ min }}
-            <a href="javascript:void(0)" class="ml-1" @click="setAmount(max)"
-              >Max</a
-            >
-            {{ max }}
+            <a @click="setAmount(min)">Min</a> {{min}} <a class="ml-1" @click="setAmount(max)">Max</a> {{max}}
           </div>
         </small>
       </div>
@@ -84,19 +79,14 @@
             autocomplete="off"
           />
         </div>
+        <small class="form-text d-flex justify-content-between" v-if="!enterSendToAddress">
+            <div class="swap_limits">
+              <a @click="enterSendToAddress = true">+ Receive at external address</a>
+            </div>
+          </small>
+      </div>
         <div class="form-group" v-if="enterSendToAddress">
-          <label class="w-100" for="amount"
-            >Receive at
-            <a
-              href="javascript:void(0)"
-              class="text-muted float-right"
-              @click="
-                enterSendToAddress = false;
-                sendTo = null;
-              "
-              >X</a
-            ></label
-          >
+           <label class="w-100" for="amount">Receive at <a class="text-muted float-right" @click="enterSendToAddress = false; sendTo = null">X</a></label>
           <div class="input-group">
             <div class="input-group">
               <input
