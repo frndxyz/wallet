@@ -2,7 +2,7 @@ import Client from '@wagerr-wdk/client'
 
 import WagerrSwapProvider from '@wagerr-wdk/wagerr-swap-provider'
 import WagerrJsWalletProvider from '@wagerr-wdk/wagerr-js-wallet-provider'
-import WagerrEsploraApiProvider from '@wagerr-wdk/wagerr-esplora-api-provider'
+import WagerrEsploraBatchApiProvider from '@wagerr-wdk/wagerr-esplora-batch-api-provider'
 import WagerrEsploraSwapFindProvider from '@wagerr-wdk/wagerr-esplora-swap-find-provider'
 import WagerrEarnFeeProvider from '@wagerr-wdk/wagerr-earn-fee-provider'
 import WagerrRpcFeeProvider from '@wagerr-wdk/wagerr-rpc-fee-provider'
@@ -55,7 +55,7 @@ const networks = {
 }
 
 const RpcProviders = {
-  WGR: WagerrEsploraApiProvider,
+  WGR: WagerrEsploraBatchApiProvider,
   ETH: EthereumRpcProvider,
   DAI: EthereumRpcProvider,
   USDC: EthereumRpcProvider,
