@@ -1,23 +1,36 @@
 <template>
   <div class="wallet">
     <NavBar showMenu="true">
-      <strong>{{wallet.name}}</strong> <span class="text-muted">({{activeNetwork}})</span>
+      <strong>{{ wallet.name }}</strong>
+      <span class="text-muted">({{ activeNetwork }})</span>
     </NavBar>
     <div class="wallet_stats">
       <div v-if="networkAssetsLoaded">
-         <div><span class="wallet_stats_total">{{totalFiatBalance}}</span><span>USD</span></div>
-         <span>{{Object.keys(networkWalletBalances).length}} Assets</span>
+        <div>
+          <span class="wallet_stats_total">{{ totalFiatBalance }}</span
+          ><span>USD</span>
+        </div>
+        <span>{{ Object.keys(networkWalletBalances).length }} Assets</span>
       </div>
       <span v-else>Loading ...</span>
     </div>
     <div class="wallet_accounts" v-if="networkWalletBalances">
-      <router-link v-for="(balance, asset) in networkWalletBalances" :key="asset" v-bind:to="'/account/' + asset" >
+      <router-link
+        v-for="(balance, asset) in networkWalletBalances"
+        :key="asset"
+        v-bind:to="'/account/' + asset"
+      >
         <div class="account-item d-flex align-items-center">
-          <img :src="'./img/' + asset.toLowerCase() + '.png'" class="account-item_icon" />
-          <div class="account-item_name flex-fill">{{asset}}</div>
+          <img
+            :src="'./img/' + asset.toLowerCase() + '.png'"
+            class="account-item_icon"
+          />
+          <div class="account-item_name flex-fill">{{ asset }}</div>
           <div class="account-item_balance">
-             {{prettyBalance(balance, asset)}} {{asset}}
-             <span class="account-item_balance_fiat">${{prettyFiat(balance, asset)}}</span>
+            {{ prettyBalance(balance, asset) }} {{ asset }}
+            <span class="account-item_balance_fiat"
+              >${{ prettyFiat(balance, asset) }}</span
+            >
           </div>
           <ChevronRightIcon class="account-item_chevron" />
         </div>
@@ -27,53 +40,69 @@
 </template>
 
 <script>
-import BN from 'bignumber.js'
-import { mapState, mapActions } from 'vuex'
-import { NetworkAssets } from '@/store/factory/client'
-import cryptoassets from '@wagerr-wdk/cryptoassets'
-import { prettyBalance, prettyFiatBalance } from '@/utils/coinFormatter'
-import NavBar from '@/components/NavBar.vue'
-import ChevronRightIcon from '@/assets/icons/chevron_right.svg'
+import BN from "bignumber.js";
+import { mapState, mapActions } from "vuex";
+import { NetworkAssets } from "@/store/factory/client";
+import cryptoassets from "@wagerr-wdk/cryptoassets";
+import { prettyBalance, prettyFiatBalance } from "@/utils/coinFormatter";
+import NavBar from "@/components/NavBar.vue";
+import ChevronRightIcon from "@/assets/icons/chevron_right.svg";
 
 export default {
   components: {
     NavBar,
-    ChevronRightIcon
+    ChevronRightIcon,
   },
   computed: {
-    ...mapState(['activeNetwork', 'balances', 'activeWalletId', 'wallets', 'fiatRates']),
+    ...mapState([
+      "activeNetwork",
+      "balances",
+      "activeWalletId",
+      "wallets",
+      "fiatRates",
+    ]),
     wallet: function () {
-      return this.wallets.find(wallet => wallet.id === this.activeWalletId)
+      return this.wallets.find((wallet) => wallet.id === this.activeWalletId);
     },
-    networkWalletBalances () {
-      if (!this.balances[this.activeNetwork]) return false
-      if (!this.balances[this.activeNetwork][this.activeWalletId]) return false
+    networkWalletBalances() {
+      if (!this.balances[this.activeNetwork]) return false;
+      if (!this.balances[this.activeNetwork][this.activeWalletId]) return false;
 
-      return this.balances[this.activeNetwork][this.activeWalletId]
+      return this.balances[this.activeNetwork][this.activeWalletId];
     },
-    networkAssets () {
-      return NetworkAssets[this.activeNetwork]
+    networkAssets() {
+      return NetworkAssets[this.activeNetwork];
     },
-    networkAssetsLoaded () {
-      return this.networkWalletBalances && this.networkAssets.length === Object.keys(this.networkWalletBalances).length
+    networkAssetsLoaded() {
+      return (
+        this.networkWalletBalances &&
+        this.networkAssets.length ===
+          Object.keys(this.networkWalletBalances).length
+      );
     },
-     totalFiatBalance () {
-       const total = Object.entries(this.networkWalletBalances).reduce((accum, [asset, balance]) => {
-         balance = cryptoassets[asset].unitToCurrency(balance)
-         const balanceFiat = this.fiatRates[asset] ? BN(balance).times(this.fiatRates[asset]) : 0
-         return accum.plus(balanceFiat)
-       }, BN(0))
-       return total.toFormat(2)
+    totalFiatBalance() {
+      const total = Object.entries(this.networkWalletBalances).reduce(
+        (accum, [asset, balance]) => {
+          balance = cryptoassets[asset].unitToCurrency(balance);
+          const balanceFiat = this.fiatRates[asset]
+            ? BN(balance).times(this.fiatRates[asset])
+            : 0;
+          return accum.plus(balanceFiat);
+        },
+        BN(0)
+      );
+      return total.toFormat(2);
+    },
+    methods: {
+      ...mapActions(["changeActiveWalletId"]),
+      prettyBalance,
+      prettyFiat(amount, asset) {
+        amount = cryptoassets[asset].unitToCurrency(amount);
+        return prettyFiatBalance(amount, this.fiatRates[asset]);
+      },
+    },
   },
-  methods: {
-    ...mapActions(['changeActiveWalletId']),
-    prettyBalance,
-    prettyFiat (amount, asset) {
-       amount = cryptoassets[asset].unitToCurrency(amount)
-       return prettyFiatBalance(amount, this.fiatRates[asset])
-    }
-  }
-}
+};
 </script>
 
 <style lang="scss">
@@ -89,15 +118,16 @@ export default {
     height: 200px;
     justify-content: center;
     align-items: center;
-    background: url('../assets/bg/asset_list.svg?inline'), $brand-gradient-primary;
+    background: url("../assets/bg/asset_list.svg?inline"),
+      $brand-gradient-primary;
     color: $color-text-secondary;
     font-size: $font-size-lg;
 
     &_total {
-       font-size: $h1-font-size;
-       line-height: $h1-font-size;
-       margin-right: 10px;
-     }
+      font-size: $h1-font-size;
+      line-height: $h1-font-size;
+      margin-right: 10px;
+    }
   }
 
   &_accounts {
@@ -135,13 +165,13 @@ export default {
     margin-right: 20px;
 
     &_fiat {
-       display: block;
-       position: absolute;
-       right: 0;
-       top: 18px;
-       font-size: $font-size-tiny;
-       color: $text-muted;
-     }
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 18px;
+      font-size: $font-size-tiny;
+      color: $text-muted;
+    }
   }
 
   &_chevron {
