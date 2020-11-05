@@ -160,7 +160,7 @@ export const createClient = (network, mnemonic) => {
   }
 
   const AdditionalSwapArgs = {
-    WGR: rpc.WGR[NetworkArgs.WGR],
+    WGR: [isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'],
     ETH: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
     DAI: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
     USDC: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
