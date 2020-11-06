@@ -25,6 +25,11 @@ svg {
   vertical-align: top;
 }
 
+textarea {
+  border-color: $hr-border-color;
+  padding: 8px;
+}
+
 #app {
   &.popup {
     min-width: auto;
@@ -253,4 +258,14 @@ svg {
     }
   }
 
+}
+
+.popup-logo {
+  padding: 20px 20px;
+  background: #302E78;
+  text-align: center;
+
+  svg {
+    height: 75px;
+  }
 }
