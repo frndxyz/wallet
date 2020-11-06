@@ -68,6 +68,10 @@ export default {
   text-align: center;
 }
 
+svg {
+     height: 75px;
+}
+
 .enable-screen {
   padding: 20px;
 }

@@ -86,7 +86,9 @@ export default {
   background: #302E78;
   text-align: center;
 }
-
+svg {
+     height: 75px;
+   }
 .permission-screen {
   padding: 20px;
 }
