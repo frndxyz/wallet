@@ -9,6 +9,8 @@
       </div>
       <div class="navbar_menu" v-if="showMenu" @click.stop="showMenuList = !showMenuList"><HamburgerIcon class="navbar_menu_icon" /></div>
       <ul class="menu_list navbar_menu_list" v-if="showMenuList" v-click-away="hideMenu">
+        <li @click="assets"><AssetsIcon />Manage Assets</li>
+        <li @click="settings"><SettingsIcon />Settings</li>
         <li @click="backup"><PaperIcon /> Backup Seed</li>
         <li @click="lock"><LockIcon class="lock_icon"/> Lock</li>
       </ul>
@@ -18,14 +20,13 @@
 
 <script>
 import { mapActions } from 'vuex'
-
 import clickAway from '@/directives/clickAway'
 import HamburgerIcon from '@/assets/icons/hamburger.svg'
 import LockIcon from '@/assets/icons/lock.svg'
 import PaperIcon from '@/assets/icons/paper.svg'
 import ChevronLeftIcon from '@/assets/icons/chevron_left.svg'
+import SettingsIcon from '@/assets/icons/settings.svg'
 import AssetsIcon from '@/assets/icons/assets.svg'
-
 export default {
   directives: {
     clickAway
@@ -35,7 +36,8 @@ export default {
     HamburgerIcon,
     LockIcon,
     PaperIcon,
-    AssetsIcon
+    AssetsIcon,
+    SettingsIcon
   },
   props: ['showMenu', 'showBack', 'backPath', 'backLabel'],
   data () {
@@ -55,9 +57,13 @@ export default {
       this.$router.replace('/backup')
     },
     assets () {
-       this.showMenuList = false
-       this.$router.replace('/settings/manage-assets')
-     },
+      this.showMenuList = false
+      this.$router.replace('/settings/manage-assets')
+    },
+    settings () {
+      this.showMenuList = false
+      this.$router.replace('/settings')
+    },
     hideMenu () {
       this.showMenuList = false
     }
@@ -71,21 +77,18 @@ export default {
   height: 48px;
   padding: 0 !important;
   border-bottom: 1px solid $hr-border-color;
-
   &_title {
     width: 100%;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
   }
-
   &_menu, &_prev {
     position: absolute;
     color: $color-text-muted;
     font-size: $font-size-sm;
     cursor: pointer;
   }
-
   &_menu {
     right: $wrapper-padding;
     &_icon {
@@ -93,31 +96,26 @@ export default {
       width: 18px;
     }
   }
-
   &_menu_list.menu_list {
     top: 47px;
     right: 0;
     left: auto;
-
     li {
       justify-content: start;
       padding: 7px $wrapper-padding;
     }
-
     svg {
       height: 18px;
       width: $wrapper-padding;
       object-fit: cover;
       margin-right: 10px;
     }
-
     .lock_icon {
       path {
         fill: $color-text-primary;
       }
     }
   }
-
   &_prev {
     left: $wrapper-padding;
     &_icon {
