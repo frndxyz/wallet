@@ -2,6 +2,7 @@ import Client from '@wagerr-wdk/client'
 
 import WagerrSwapProvider from '@wagerr-wdk/wagerr-swap-provider'
 import WagerrJsWalletProvider from '@wagerr-wdk/wagerr-js-wallet-provider'
+import WagerrRpcProvider from '@wagerr-wdk/wagerr-rpc-provider'
 import WagerrEsploraBatchApiProvider from '@wagerr-wdk/wagerr-esplora-batch-api-provider'
 import WagerrEsploraSwapFindProvider from '@wagerr-wdk/wagerr-esplora-swap-find-provider'
 import WagerrEarnFeeProvider from '@wagerr-wdk/wagerr-earn-fee-provider'
@@ -31,9 +32,22 @@ function createWgrClient (network, mnemonic) {
   const wagerrNetwork = isTestnet ? WagerrNetworks.wagerr_testnet : WagerrNetworks.wagerr
   const esploraApi = isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'
   const batchEsploraApi = isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'
+  const rpcUrl = isTestnet ? 'https://wagerr.com/bitcointestnetrpc/' : 'https://wagerr.com/bitcoinrpc/'
+  const rpcUser = isTestnet ? 'wagerr' : 'test'
+  const rpcPassword = isTestnet ? 'local321' : 'wagerr123'
+
+   /**
+    * Temporary provision to ensure `mediantime` is used for block.timestamp
+    * Esplora API does not provide the `mediantime` and `timestamp` is not suitable for timelocked applications
+    * https://github.com/Blockstream/esplora/issues/269
+    * OP_CLTV checks against `mediantime`
+    */
+   const wagerrRpcProvider = new WagerrRpcProvider(rpcUrl, rpcUser, rpcPassword)
+   const wagerrEsploraProvider = new WagerrEsploraBatchApiProvider(batchEsploraApi, esploraApi, network, 2)
+   wagerrEsploraProvider.getBlockByHash = (blockHash) => wagerrRpcProvider.getBlockByHash(blockHash)
 
   const wgrClient = new Client()
-  wgrClient.addProvider(new WagerrEsploraBatchApiProvider(batchEsploraApi, esploraApi, network, 2))
+  wgrClient.addProvider(wagerrEsploraProvider)
   wgrClient.addProvider(new WagerrJsWalletProvider(wagerrNetwork, mnemonic))
   wgrClient.addProvider(new WagerrSwapProvider(wagerrNetwork))
   wgrClient.addProvider(new WagerrEsploraSwapFindProvider(esploraApi))
