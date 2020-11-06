@@ -43,7 +43,7 @@ function createWgrClient (network, mnemonic) {
     * OP_CLTV checks against `mediantime`
     */
    const wagerrRpcProvider = new WagerrRpcProvider(rpcUrl, rpcUser, rpcPassword)
-   const wagerrEsploraProvider = new WagerrEsploraBatchApiProvider(batchEsploraApi, esploraApi, network, 2)
+   const wagerrEsploraProvider = new WagerrEsploraBatchApiProvider(batchEsploraApi, esploraApi, wagerrNetwork, 2)
    wagerrEsploraProvider.getBlockByHash = (blockHash) => wagerrRpcProvider.getBlockByHash(blockHash)
 
   const wgrClient = new Client()
