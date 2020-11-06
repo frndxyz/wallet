@@ -28,7 +28,7 @@
  <script>
  import { isEmpty } from 'lodash-es'
  import { mapState, mapActions } from 'vuex'
- import cryptoassets from '@liquality/cryptoassets'
+ import cryptoassets from '@wagerr-wdk/cryptoassets'
  import { prettyBalance } from '@/utils/coinFormatter'
  import { getAllAssets, getAssetIcon } from '@/utils/asset'
  import NavBar from '@/components/NavBar.vue'
