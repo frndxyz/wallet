@@ -24,6 +24,7 @@ import HamburgerIcon from '@/assets/icons/hamburger.svg'
 import LockIcon from '@/assets/icons/lock.svg'
 import PaperIcon from '@/assets/icons/paper.svg'
 import ChevronLeftIcon from '@/assets/icons/chevron_left.svg'
+import AssetsIcon from '@/assets/icons/assets.svg'
 
 export default {
   directives: {
@@ -33,7 +34,8 @@ export default {
     ChevronLeftIcon,
     HamburgerIcon,
     LockIcon,
-    PaperIcon
+    PaperIcon,
+    AssetsIcon
   },
   props: ['showMenu', 'showBack', 'backPath', 'backLabel'],
   data () {
@@ -52,6 +54,10 @@ export default {
       this.showMenuList = false
       this.$router.replace('/backup')
     },
+    assets () {
+       this.showMenuList = false
+       this.$router.replace('/settings/manage-assets')
+     },
     hideMenu () {
       this.showMenuList = false
     }
@@ -102,7 +108,7 @@ export default {
       height: 18px;
       width: $wrapper-padding;
       object-fit: cover;
-      margin-right: 6px;
+      margin-right: 10px;
     }
 
     .lock_icon {
