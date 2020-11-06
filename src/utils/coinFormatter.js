@@ -35,5 +35,5 @@ export const prettyFiatBalance = (amount, rate) => {
 
   const fiatAmount = BN(amount).times(rate)
 
-  return fiatAmount.toFormat(2)
+  return fiatAmount.toFormat(2, BN.ROUND_CEIL)
 }

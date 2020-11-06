@@ -7,7 +7,10 @@ import BN from 'bignumber.js'
    SWAP_INITIATION: 'SWAP_INITIATION',
    SWAP_CLAIM: 'SWAP_CLAIM'
  }
-
+/**
+  * TODO: Move to Chain Abstraction Layer in the form
+  * client.chain.getFeeUnits('swap.initiationSwap')
+  * */
  const FEE_UNITS = {
    WGR: {
      [TX_TYPES.SEND]: 178, // Assume 2 inputs
