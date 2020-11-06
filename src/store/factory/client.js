@@ -21,103 +21,9 @@ import EthereumErc20ScraperSwapFindProvider from '@wagerr-wdk/ethereum-erc20-scr
 import WagerrNetworks from '@wagerr-wdk/wagerr-networks'
 import EthereumNetworks from '@wagerr-wdk/ethereum-networks'
 
-const rpc = {
-  WGR: {
-    wagerr: ['https://explorer.wagerr.com/api', WagerrNetworks.wagerr, 2],
-    wagerr_testnet: ['https://explorer2.wagerr.com/api', WagerrNetworks.wagerr_testnet, 2]
-  },
-  ETH: {
-    mainnet: ['https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f'],
-    rinkeby: ['https://rinkeby.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f']
-  },
-  DAI: {
-    mainnet: ['https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f'],
-    rinkeby: ['https://rinkeby.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f']
-  },
-  USDC: {
-    mainnet: ['https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f']
-  },
-  USDT: {
-    mainnet: ['https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f']
-  },
-  WBTC: {
-    mainnet: ['https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f']
-  }
-}
+import { isERC20 } from '../../utils/asset'
 
-const networks = {
-  WGR: WagerrNetworks,
-  ETH: EthereumNetworks,
-  DAI: EthereumNetworks,
-  USDC: EthereumNetworks,
-  USDT: EthereumNetworks,
-  WBTC: EthereumNetworks
-}
-
-const RpcProviders = {
-  WGR: WagerrEsploraBatchApiProvider,
-  ETH: EthereumRpcProvider,
-  DAI: EthereumRpcProvider,
-  USDC: EthereumRpcProvider,
-  USDT: EthereumRpcProvider,
-  WBTC: EthereumRpcProvider
-}
-
-const JsWalletProviders = {
-  WGR: WagerrJsWalletProvider,
-  ETH: EthereumJsWalletProvider,
-  DAI: EthereumJsWalletProvider,
-  USDC: EthereumJsWalletProvider,
-  USDT: EthereumJsWalletProvider,
-  WBTC: EthereumJsWalletProvider
-}
-
-const SwapProviders = {
-  WGR: WagerrSwapProvider,
-  ETH: EthereumSwapProvider,
-  DAI: EthereumErc20SwapProvider,
-  USDC: EthereumErc20SwapProvider,
-  USDT: EthereumErc20SwapProvider,
-  WBTC: EthereumErc20SwapProvider
-}
-
-const AdditionalSwapProviders = {
-  WGR: WagerrEsploraSwapFindProvider,
-  ETH: EthereumScraperSwapFindProvider,
-  DAI: EthereumErc20ScraperSwapFindProvider,
-  USDC: EthereumErc20ScraperSwapFindProvider,
-  USDT: EthereumErc20ScraperSwapFindProvider,
-  WBTC: EthereumErc20ScraperSwapFindProvider
-}
-
-const FeeProviders = {
-  WGR: {
-    wagerr: WagerrEarnFeeProvider,
-    wagerr_testnet: WagerrRpcFeeProvider
-  },
-  ETH: {
-    mainnet: EthereumGasStationFeeProvider,
-    rinkeby: EthereumRpcFeeProvider
-  },
-  DAI: {
-    mainnet: EthereumGasStationFeeProvider,
-    rinkeby: EthereumRpcFeeProvider
-  },
-  USDC: {
-    mainnet: EthereumGasStationFeeProvider,
-    rinkeby: EthereumRpcFeeProvider
-  },
-  USDT: {
-    mainnet: EthereumGasStationFeeProvider,
-    rinkeby: EthereumRpcFeeProvider
-  },
-  WBTC: {
-    mainnet: EthereumGasStationFeeProvider,
-    rinkeby: EthereumRpcFeeProvider
-  }
-}
-
-const ERC20 = {
+const ERC20_CONTRACT_ADDRESSES = {
   DAI: {
     mainnet: '0x6b175474e89094c44da98b954eedeac495271d0f',
     rinkeby: '0xcE2748BE67fB4346654B4500c4BB0642536365FC'
@@ -138,69 +44,50 @@ export const NetworkAssets = {
   testnet: ['WGR', 'ETH', 'DAI']
 }
 
-export const createClient = (network, mnemonic) => {
+function createWgrClient (network, mnemonic) {
   const isTestnet = network === 'testnet'
 
-  const NetworkArgs = {
-    WGR: isTestnet ? 'wagerr_testnet' : 'wagerr',
-    ETH: isTestnet ? 'rinkeby' : 'mainnet',
-    DAI: isTestnet ? 'rinkeby' : 'mainnet',
-    USDC: isTestnet ? 'rinkeby' : 'mainnet',
-    USDT: isTestnet ? 'rinkeby' : 'mainnet',
-    WBTC: isTestnet ? 'rinkeby' : 'mainnet'
+  const wagerrNetwork = isTestnet ? WagerrNetworks.wagerr_testnet : WagerrNetworks.wagerr
+  const esploraApi = isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'
+  const batchEsploraApi = isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'
+
+  const wgrClient = new Client()
+  wgrClient.addProvider(new WagerrEsploraBatchApiProvider(batchEsploraApi, esploraApi, network, 2))
+  wgrClient.addProvider(new WagerrJsWalletProvider(wagerrNetwork, mnemonic))
+  wgrClient.addProvider(new WagerrSwapProvider(wagerrNetwork))
+  wgrClient.addProvider(new WagerrEsploraSwapFindProvider(esploraApi))
+  if (isTestnet) wgrClient.addProvider(new WagerrRpcFeeProvider())
+  else wgrClient.addProvider(new WagerrEarnFeeProvider())
+
+  return wgrClient
+}
+
+function createEthClient (asset, network, mnemonic) {
+  const isTestnet = network === 'testnet'
+  const ethereumNetwork = isTestnet ? EthereumNetworks.rinkeby : EthereumNetworks.mainnet
+  const infuraApi = isTestnet ? 'https://rinkeby.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f' : 'https://mainnet.infura.io/v3/da99ebc8c0964bb8bb757b6f8cc40f1f'
+  const scraperApi = isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'
+
+  const ethClient = new Client()
+  ethClient.addProvider(new EthereumRpcProvider(infuraApi))
+  ethClient.addProvider(new EthereumJsWalletProvider(ethereumNetwork, mnemonic))
+  if (isERC20(asset)) {
+    const contractAddress = ERC20_CONTRACT_ADDRESSES[asset][ethereumNetwork.name]
+    ethClient.addProvider(new EthereumErc20Provider(contractAddress))
+    ethClient.addProvider(new EthereumErc20SwapProvider())
+    ethClient.addProvider(new EthereumErc20ScraperSwapFindProvider(scraperApi))
+  } else {
+    ethClient.addProvider(new EthereumSwapProvider())
+    ethClient.addProvider(new EthereumScraperSwapFindProvider(scraperApi))
   }
+  if (isTestnet) ethClient.addProvider(new EthereumRpcFeeProvider())
+  else ethClient.addProvider(new EthereumGasStationFeeProvider())
 
-  const SwapArgs = {
-    WGR: [networks.WGR[NetworkArgs.WGR], 'p2wsh'],
-    ETH: [],
-    DAI: [],
-    USDC: [],
-    USDT: [],
-    WBTC: []
-  }
+  return ethClient
+}
 
-  const AdditionalSwapArgs = {
-    WGR: [isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'],
-    ETH: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
-    DAI: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
-    USDC: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
-    USDT: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api'],
-    WBTC: [isTestnet ? 'https://liquality.io/eth-rinkeby-api' : 'https://liquality.io/eth-mainnet-api']
-  }
+export const createClient = (asset, network, mnemonic) => {
+  if (asset === 'WGR') return createWgrClient(network, mnemonic)
 
-  return NetworkAssets[network].map(asset => {
-    const client = new Client()
-
-    client.addProvider(new RpcProviders[asset](
-      ...rpc[asset][NetworkArgs[asset]]
-    ))
-
-    client.addProvider(new JsWalletProviders[asset](
-      networks[asset][NetworkArgs[asset]],
-      mnemonic
-    ))
-
-    if (ERC20[asset] && ERC20[asset][NetworkArgs[asset]]) {
-      client.addProvider(new EthereumErc20Provider(ERC20[asset][NetworkArgs[asset]]))
-    }
-
-    client.addProvider(new SwapProviders[asset](
-      ...SwapArgs[asset]
-    ))
-
-    client.addProvider(new AdditionalSwapProviders[asset](
-      ...AdditionalSwapArgs[asset]
-    ))
-
-    client.addProvider(new FeeProviders[asset][NetworkArgs[asset]]())
-
-    return {
-      asset,
-      client
-    }
-  }).reduce((acc, { asset, client }) => {
-    acc[asset] = client
-
-    return acc
-  }, {})
+  return createEthClient(asset, network, mnemonic)
 }
