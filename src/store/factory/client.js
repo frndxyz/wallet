@@ -52,7 +52,7 @@ function createWgrClient (network, mnemonic) {
   wgrClient.addProvider(new WagerrSwapProvider(wagerrNetwork))
   wgrClient.addProvider(new WagerrEsploraSwapFindProvider(esploraApi))
   if (isTestnet) wgrClient.addProvider(new WagerrRpcFeeProvider())
-  else wgrClient.addProvider(new WagerrEarnFeeProvider())
+  else wgrClient.addProvider(new WagerrEarnFeeProvider('https://wagerr.com/swap/mempool/v1/fees/recommended'))
 
   return wgrClient
 }
