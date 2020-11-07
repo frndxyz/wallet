@@ -7,7 +7,7 @@ import { providerManager, ethereumProvider, wagerrProvider } from './inject'
 inject(providerManager)
 inject(wagerrProvider)
 
-chrome.storage.local.get(['liquality-wallet'], (storage) => {
-  const state = storage['liquality-wallet']
+chrome.storage.local.get(['wagerr-wallet'], (storage) => {
+  const state = storage['wagerr-wallet']
   if (state.injectEthereum) inject(ethereumProvider)
 })
