@@ -15,7 +15,7 @@ const CONFIRM_REQUIRED = [
   /^swap.claimSwap$/,
   /^swap.refundSwap$/,
 
-  // Bitcoin
+  // Wagerr
   /^signP2SHTransaction$/
 ]
 

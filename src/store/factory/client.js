@@ -32,7 +32,7 @@ function createWgrClient (network, mnemonic) {
   const wagerrNetwork = isTestnet ? WagerrNetworks.wagerr_testnet : WagerrNetworks.wagerr
   const esploraApi = isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'
   const batchEsploraApi = isTestnet ? 'https://explorer2.wagerr.com/api' : 'https://explorer.wagerr.com/api'
-  const rpcUrl = isTestnet ? 'https://wagerr.com/bitcointestnetrpc/' : 'https://wagerr.com/bitcoinrpc/'
+  const rpcUrl = isTestnet ? 'https://wagerr.com/wagerrtestnetrpc/' : 'https://wagerr.com/wagerrrpc/'
   const rpcUser = isTestnet ? 'wagerr' : 'test'
   const rpcPassword = isTestnet ? 'local321' : 'wagerr123'
 
