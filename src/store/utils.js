@@ -87,8 +87,9 @@ async function getCoins() {
     return COIN_GECKO_CACHE.coins
   }
 
-  const response = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250`)
-  const coins = response.data
+  const response_page1 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1`)
+  const response_page2 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=2`)
+  const coins = Array.prototype.concat(response_page1.data,response_page2.data);
   COIN_GECKO_CACHE.coins = coins
   return coins
 }
