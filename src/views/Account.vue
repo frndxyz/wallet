@@ -27,10 +27,10 @@
           <router-link :to="sendDisabled ? '' : '/account/' + asset + '/send'"><button class="account_actions_button" :class="{ disabled: sendDisabled }">
             <div class="account_actions_button_wrapper"><SendIcon class="account_actions_button_icon" /></div>Send
           </button></router-link>
-          <router-link :to="swapDisabled ? '' : '/account/' + asset + '/swap'"><button class="account_actions_button" :class="{ disabled: swapDisabled }">
+          <router-link v-bind:to="'/account/' + asset + '/receive'"><button class="account_actions_button">
             <div class="account_actions_button_wrapper"><ReceiveIcon class="account_actions_button_icon" /></div>Receive
           </button></router-link>
-          <router-link v-bind:to="'/account/' + asset + '/swap'"><button class="account_actions_button">
+          <router-link :to="swapDisabled ? '' : '/account/' + asset + '/swap'"><button class="account_actions_button" :class="{ disabled: swapDisabled }">
             <div class="account_actions_button_wrapper"><SwapIcon class="account_actions_button_icon account_actions_button_swap" /></div>Swap
           </button></router-link>
         </div>
@@ -210,7 +210,7 @@ export default {
 
     &_value {
       line-height: 36px;
-      font-size: 50px;
+      font-size: 30px;
       margin-right: 8px;
     }
 
