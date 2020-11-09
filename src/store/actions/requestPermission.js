@@ -36,9 +36,8 @@ export const requestPermission = async ({ state, dispatch }, { origin, data }) =
 
   const { activeNetwork: network, activeWalletId: walletId } = state
 
-  args = args.map(a => {
-    if (a === null) return undefined
-    return a
+  args = args.filter(a => {
+    return a !== null;
   })
 
   let printArgs = args
