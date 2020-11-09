@@ -46,7 +46,7 @@ export const newOrder = (agent, data) => {
     data,
     headers: {
       'x-requested-with': 'wallet',
-      'x-liquality-user-agent': 'wallet'
+      'x-wagerr-user-agent': 'wallet'
     }
   }).then(res => res.data)
 }
@@ -63,7 +63,7 @@ export const updateOrder = (order) => {
     },
     headers: {
       'x-requested-with': 'wallet',
-      'x-liquality-user-agent': 'wallet'
+      'x-wagerr-user-agent': 'wallet'
     }
   }).then(res => res.data)
 }
@@ -74,7 +74,7 @@ export const getMarketData = agent => {
     method: 'get',
     headers: {
       'x-requested-with': 'wallet',
-      'x-liquality-user-agent': 'wallet'
+      'x-wagerr-user-agent': 'wallet'
     }
   }).then(res => res.data)
 }

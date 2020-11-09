@@ -9,7 +9,7 @@
         <p class="c7" id="h.gjdgxs">
           <span
             class="c14 c3"
-          >THIS IS THE BETA VERSION OF THE LIQUALITY PLATFORM WHICH IS STILL BEING ACTIVELY DEVELOPED. YOU ACKNOWLEDGE THE INFORMATION AVAILABLE IS NOT INTENDED TO BE RELIED ON OR USED IN A PRODUCTION ENVIRONMENT. YOU ACKNOWLEDGE AND ACCEPT THAT THE SITE OR SERVICES (A) MAY CONTAIN BUGS, ERRORS, AND DEFECTS, (B) MAY FUNCTION IMPROPERLY OR BE SUBJECT TO PERIODS OF DOWNTIME AN UNAVAILABILITY, (C) MAY RESULT IN TOTAL OR PARTIAL LOSS OR CORRUPTION OF DATA USED IN THE SITE, AND (D) MAY BE MODIFIED AT ANY TIME, INCLUDING THROUGH THE RELEASE OF SUBSEQUENT VERSIONS, ALL WITH OR WITHOUT NOTICE. THE ALPHA PLATFORM IS AVAILABLE ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR THE SOLE PURPOSE OF COLLECTING FEEDBACK ON QUALITY, USABILITY, PERFORMANCE AND ANY DEFECTS. THANK YOU FOR YOUR SUPPORT WHILE WE CONTINUE TO WORK ON DELIVERING A PERFECT PRODUCT.</span>
+          >THIS IS THE BETA VERSION OF THE Wagerr PLATFORM WHICH IS STILL BEING ACTIVELY DEVELOPED. YOU ACKNOWLEDGE THE INFORMATION AVAILABLE IS NOT INTENDED TO BE RELIED ON OR USED IN A PRODUCTION ENVIRONMENT. YOU ACKNOWLEDGE AND ACCEPT THAT THE SITE OR SERVICES (A) MAY CONTAIN BUGS, ERRORS, AND DEFECTS, (B) MAY FUNCTION IMPROPERLY OR BE SUBJECT TO PERIODS OF DOWNTIME AN UNAVAILABILITY, (C) MAY RESULT IN TOTAL OR PARTIAL LOSS OR CORRUPTION OF DATA USED IN THE SITE, AND (D) MAY BE MODIFIED AT ANY TIME, INCLUDING THROUGH THE RELEASE OF SUBSEQUENT VERSIONS, ALL WITH OR WITHOUT NOTICE. THE ALPHA PLATFORM IS AVAILABLE ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR THE SOLE PURPOSE OF COLLECTING FEEDBACK ON QUALITY, USABILITY, PERFORMANCE AND ANY DEFECTS. THANK YOU FOR YOUR SUPPORT WHILE WE CONTINUE TO WORK ON DELIVERING A PERFECT PRODUCT.</span>
         </p>
         <p class="c9 c10">
           <span class="c19 c3 c17"></span>
@@ -27,9 +27,9 @@
         </p>
         <p class="c7">
           <span>Welcome to ConsenSys AG’s</span>
-          <span>Liquality</span>
+          <span>Wagerr</span>
           <span>(“</span>
-          <span class="c3">Liquality</span>
+          <span class="c3">Wagerr</span>
           <span>”, “</span>
           <span class="c3">Company</span>
           <span>”, “</span>
@@ -38,7 +38,7 @@
           <span class="c3">our</span>
           <span>”, or “</span>
           <span class="c3">us</span>
-          <span>”). Liquality is a client-based platform that would enable users to swap consumer tokens on a peer-to-peer basis without an intermediary. These terms of use (“</span>
+          <span>”). Wagerr is a client-based platform that would enable users to swap consumer tokens on a peer-to-peer basis without an intermediary. These terms of use (“</span>
           <span class="c3">Terms</span>
           <span>”, “</span>
           <span class="c3">Terms of Use</span>
@@ -46,7 +46,7 @@
           <span class="c3">Agreement</span>
           <span>”) govern your use of the website located at</span>
           <span class="c15">
-            <a class="c16" href="https://liquality.io/">https://liquality.io/</a>
+            <a class="c16" href="https://wagerr.com/">https://wagerr.com/</a>
           </span>
           <span>&nbsp;(the “</span>
           <span class="c3">Site</span>

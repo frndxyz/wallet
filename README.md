@@ -1,4 +1,4 @@
-# Wagerr Wallet <img align="right" src="https://raw.githubusercontent.com/liquality/chainabstractionlayer/master/wagerr-logo.png" height="80px" />
+# Wagerr Wallet <img align="right" src="https://raw.githubusercontent.com/wagerr/chainabstractionlayer/master/wagerr-logo.png" height="80px" />
 
 ## Project setup
 ```

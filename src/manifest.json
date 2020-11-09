@@ -3,7 +3,7 @@
   "version": "0.2.7",
   "name": "Wagerr Wallet",
   "description": "Secure multi-crypto wallet with built-in Atomic Swaps!",
-  "homepage_url": "https://liquality.io",
+  "homepage_url": "https://wagerr.com",
   "permissions": [
     "notifications",
     "storage",

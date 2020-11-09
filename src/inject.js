@@ -85,8 +85,8 @@ window.providerManager = new ProviderManager()
    return eth.getMethod('jsonrpc')(req.method, ...req.params)
  }
 
- window.liqualityEthereum = {
-   isLiquality: true,
+ window.wagerrEthereum = {
+   isWagerr: true,
    isEIP1193: true,
    enable: async () => {
      const accepted = await window.providerManager.enable()
@@ -114,7 +114,7 @@ window.providerManager = new ProviderManager()
  };
 
  function override() {
-   window.ethereum = window.liqualityEthereum
+   window.ethereum = window.wagerrEthereum
  }
 
  if (!window.ethereum) {
@@ -123,7 +123,7 @@ window.providerManager = new ProviderManager()
    let retries = 0
    const interval = setInterval(() => {
      retries++
-     if (window.ethereum && !window.ethereum.isLiquality) {
+     if (window.ethereum && !window.ethereum.isWagerr) {
        override();
        clearInterval(interval)
      }
