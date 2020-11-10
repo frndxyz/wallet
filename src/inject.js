@@ -140,7 +140,7 @@ window.providerManager = new ProviderManager()
    wallet_getAddresses: 'wallet.getAddresses',
    wallet_signMessage: 'wallet.signMessage',
    wallet_sendTransaction: 'chain.sendTransaction',
-   wallet_signP2SHTransaction: 'signP2SHTransaction',
+   wallet_signPSBT: 'signPSBT',
  }
 
  async function handleRequest (req) {

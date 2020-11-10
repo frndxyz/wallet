@@ -16,7 +16,7 @@ const CONFIRM_REQUIRED = [
   /^swap.refundSwap$/,
 
   // Wagerr
-  /^signP2SHTransaction$/
+  /^signPSBT$/
 ]
 
 const ALLOWED = [
