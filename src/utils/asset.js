@@ -6,8 +6,8 @@ const EXPLORERS = {
     mainnet: 'https://etherscan.io/tx/0x'
   },
   WGR: {
-    testnet: 'https://blockstream.info/testnet/tx/',
-    mainnet: 'https://blockstream.info/tx/'
+    testnet: 'https://explorer2.wagerr.com/#/tx/',
+    mainnet: 'https://explorer.wagerr.com/#/tx/'
   }
 }
 
