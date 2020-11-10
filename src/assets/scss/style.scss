@@ -93,6 +93,14 @@ textarea {
   }
 }
 
+&_bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 20px;
+}
+
 .button-group {
   display: flex;
   justify-content: space-between;
