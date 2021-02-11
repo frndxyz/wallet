@@ -23,6 +23,8 @@ const ALLOWED = [
   ...CONFIRM_REQUIRED,
   /^chain.getConnectedNetwork$/,
   /^wallet.getAddresses*$/,
+  /^chain.getBalance$/,
+  /^wallet.getUsedAddresses$/,
   /^jsonrpc$/
 ]
 
