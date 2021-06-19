@@ -131,7 +131,7 @@ export default {
       this.updateBalances({ network: this.activeNetwork, walletId: this.activeWalletId })
     },
     getTransactionStatus (item) {
-      return item.type === 'SWAP' ? getOrderStatusLabel(item) : undefined
+      return item.type === 'SWAP' ? getOrderStatusLabel(item) : item.txHash
     },
     getTransactionStep (item) {
       return item.type === 'SWAP' ? ORDER_STATUS_STEP_MAP[item.status] + 1 : undefined

@@ -11,7 +11,10 @@
     <div class="transaction_action">{{title}}</div>
     <div class="transaction_time">{{time}}</div>
     <div class="transaction_amount">{{prettyBalance(amount, asset)}} {{code}}</div>
-    <div class="transaction_detail">{{detail}}</div>
+    <div class="transaction_detail">
+     <CopyIcon class="transaction_icon_txhash" @click="copyTxHash()"  v-tooltip.bottom="{ content: 'Copy Tx', hideOnTargetClick: false }"/> &nbsp;
+     <!-- <a href="" target="_blank"><ExplorerIcon  class="transaction_icon_explorer" /></a> -->
+</div>
     <div class="transaction_status" v-if="!error">
       <CompletedIcon v-if="confirmed" />
       <div class="transaction_status_confirming" v-if="!confirmed">
@@ -31,6 +34,8 @@ import ReceiveIcon from '@/assets/icons/arrow_receive.svg'
 import SwapIcon from '@/assets/icons/arrow_swap.svg'
 import CompletedIcon from '@/assets/icons/completed.svg'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
+import CopyIcon from '@/assets/icons/copy.svg'
+import ExplorerIcon from '@/assets/icons/search.svg'
 
 export default {
   components: {
@@ -38,7 +43,9 @@ export default {
     ReceiveIcon,
     SwapIcon,
     CompletedIcon,
-    SpinnerIcon
+    SpinnerIcon,
+    CopyIcon,
+    ExplorerIcon
   },
   props: {
     asset: String,
@@ -64,7 +71,10 @@ export default {
     }
   },
   methods: {
-    prettyBalance
+    prettyBalance,
+    async copyTxHash () {
+      await navigator.clipboard.writeText(this.detail)
+    }
   }
 }
 </script>
@@ -102,6 +112,21 @@ export default {
       path {
         stroke: #2CD2CF;
       }
+    }
+
+    &_txhash, &_explorer {
+      path {
+        stroke: #8f9091;
+        fill:#fff;
+        fill-opacity:0.5;
+      };
+      width: 16px;
+      height: 16px;
+      :hover {
+        stroke:#b40101
+      };
+      background-color: white;
+
     }
 
     &_swap {

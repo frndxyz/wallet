@@ -82,19 +82,22 @@ export const getMarketData = agent => {
 const COIN_GECKO_CACHE = {}
 const COIN_GECKO_API = 'https://api.coingecko.com/api/v3'
 
-async function getCoins() {
+async function getCoins () {
   if ('coins' in COIN_GECKO_CACHE) {
     return COIN_GECKO_CACHE.coins
   }
 
   const response_page1 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1`)
   const response_page2 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=2`)
-  const coins = Array.prototype.concat(response_page1.data,response_page2.data);
+  const response_page3 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=3`)
+  const response_page4 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=4`)
+  const response_page5 = await axios.get(`${COIN_GECKO_API}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=5`)
+  const coins = Array.prototype.concat(response_page1.data, response_page2.data, response_page3.data,response_page4.data,response_page5.data);
   COIN_GECKO_CACHE.coins = coins
   return coins
 }
 
-export async function getPrices(baseCurrencies, toCurrency) {
+export async function getPrices (baseCurrencies, toCurrency) {
   const coins = await getCoins()
   const coindIds = baseCurrencies.reduce((list, currency) => {
     const coin = coins.find(coin => coin.symbol === currency.toLowerCase())
